@@ -1,0 +1,490 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="jQuery docPlugin is a set of helpers to create dynamically parts of a document or set effects on particular areas of a page.">
+    <meta name="author" content="Alfredo Cosco">
+    <title>jQuery docPlugin</title>
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    
+		<style>
+			html,body{
+				height: auto;
+				min-height: 100%;
+				}
+			
+			.jumbotron{
+				background-color:#000055;
+				background:url("images/bg.jpg") no-repeat;
+				background-size: cover;
+				}	
+			.jumbotron h1{
+				color:#fff;
+				font-weight:bold;
+				}						
+		</style>
+    <link href="css/docPlugin.css" rel="stylesheet" />
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">jQuery docPlugin</a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron fullpage">
+      <div class="container">
+        <h1>jQuery docPlugin v1</h1>
+        <p><a href="https://github.com/orazionelson/docPlugin"><img src="images/github.png"/></a></p>
+      </div>
+    </div>
+<div class="container" id="main">
+    <div id="document" data-deepness="12">
+      <!-- data-tocside="right"  -->
+	<div class="intro lead">
+		<h2>Intro</h2>
+          <p>jQuery docPlugin is a set of helpers to create dynamically parts of a document and add effects to it.</p> 
+          <p>The plugin works under HTML5+Bootstrap+jQuery.</p>
+          <h3>Install</h3>
+          <p>Put <code>jquery.documentPlugin.js</code> in you <b>js</b> directory and <code>docPlugin.css</code> in your <b>ccs</b> directory.</p>
+          <h3>Use</h3>
+          <p>Look at the logic, this is a document template inside the html body:</p>
+          <pre>
+		&lt;div id=document">
+			&lt;div>&lt;!--Chapter-->
+				&lt;h2>Section title&lt;/h2>
+				&lt;p>paragraph&lt;/p>
+				&lt;p>paragraph&lt;/p>
+				&lt;p>paragraph&lt;/p>
+
+				&lt;h3>Sub-section&lt;/h3>
+				&lt;p>paragraph&lt;/p>
+				&lt;p>paragraph&lt;/p>
+				&lt;p>paragraph&lt;/p>
+			&lt;/div>
+			&lt;div>&lt;!--Chapter-->
+				&lt;h2>Section title&lt;/h2>
+				&lt;p>paragraph&lt;/p>
+				&lt;p>paragraph&lt;/p>
+				&lt;p>paragraph&lt;/p>
+
+				&lt;h3>Sub-section&lt;/h3>
+				&lt;p>paragraph&lt;/p>
+				&lt;p>paragraph&lt;/p>
+				&lt;p>paragraph&lt;/p>
+			&lt;/div>
+			&lt;div>&lt;!--Chapter-->
+				&lt;h2>Section title&lt;/h2>
+				&lt;p>paragraph&lt;/p>
+				&lt;p>paragraph&lt;/p>
+				&lt;p>paragraph&lt;/p>
+				
+				&lt;h3>Sub-section&lt;/h3>
+				&lt;p>paragraph&lt;/p>
+				&lt;p>paragraph&lt;/p>
+				&lt;p>paragraph&lt;/p>
+			&lt;/div>
+		&lt;/div> 
+          </pre>
+          <p>Just add the <code>id="document"</code> attribute to the text to parse.</p>
+
+          
+          <p>Call the plugin you need.</p>
+          <p>There are several plugins:</p>
+          <ul>
+          <li>docPlugin</li>
+          <li>tocfy</li>
+          <li>tabfy</li>
+          <li>footnotes</li>
+          <li>prettyPre</li>
+          <li>scroller</li>
+          <li>fullpage</li>
+          <li>sortlist</li>
+          </ul>
+          <p>Each plugin/helper is indipendent.</p>
+	</div>
+	<div class="plugin-docPlugin">
+		<h2>$.fn.docPlugin</h2>
+		<p><code>$.fn.docPlugin</code> provides for actions on the full area marked as <code>#document</code></p>
+		<h3>Trigger</h3>
+		<p>Call the plugin on the element to parse</p>
+		<pre>$("#document").docPlugin();</pre>
+			
+          <h3>Options</h3>
+          <p>You can configure some options</p>
+          <pre>
+//activate fullpage on every .chapter
+chapterfullpage: true, //true|false
+//show chapre buttons
+chapterbuttons: "top,prev,next", //false|"top,prev,next"
+//prettify &lt;pre&gt; elements in document
+prettify:true, //true|false
+//activare scroller i document
+scroller:true,
+//set globally the scroller delta with an integer
+scrollerdelta:50,   
+//sort each list with class .sorted
+sortlist:true,   
+          </pre>
+	</div>
+	<div class="plugin-tocfy">         
+          <h2>$.fn.tocfy - creates a toc</h2>
+          <p>This function grabs <b>h1/2/3/4/5</b> elements from a page area and creates a table of contents.</p>
+           <h3>Trigger</h3>
+          <p>Just call the plugin like this: <code>$.fn.tocfy()</code> if you want to use the same id of <b>docPlugin</b> and apply the toc to the whole document.</p>
+          <p>Or call it in this way: <code>$('#document').tocfy();</code> to apply on a selected element.</p>
+        
+          <h3>Options</h3>
+			<pre>
+			deepness:'123456', //a string of numbers from 1 to 6 defines how deep is your menu
+			tocside: right, //choose :right|left|top
+			tocbehavior: scroll //choose:scroll|scrollFixed|fixed|offcanvas
+			offcanvasBtn: '#main' //if set offcanvas toc prepend here the butto for the sliding
+			tocliststyle: "ul square" //options: ol (decimal numbered list),ul square|circle|disc (unordered list)
+			</pre>
+			<h3>data-*</h3>
+			<p>This function accepts options also by <code>data-*</code> attribute:</p>
+			<pre>
+				&lt;div id="document" data-tocside="right" data-tocbehavior="scrollFixed">
+					...
+				&lt;/div>
+			</pre>
+	</div>
+	<div class="plugin-tabfy">
+		<h2>$.fn.tabfy - show a section as tabs</h2>
+		<p>If you have a page or a section like this:</p>
+<pre>&lt;div id="sectionUniqueId"&gt;
+	&lt;p class="tabitem"&gt;Title 1&lt;/p&gt;
+	&lt;div&gt;Content&lt;/div&gt;
+	&lt;p class="tabitem"&gt;Title 2&lt;/p&gt;
+	&lt;div&gt;Content 2&lt;/div&gt;
+	&lt;p class="tabitem"&gt;Title 3&lt;/p&gt;
+	&lt;div&gt;Content 3&lt;/div&gt;
+	...
+&lt;/div&gt;
+</pre>
+
+	<p>The tabfy plugin can create a tabbed section.</p>
+	<h3>Trigger</h3>
+		<p>Add a unique id to the section and call the plugin <code>$("#sectionUniqueId").tabfy()</code></p>
+	<h3>Options:</h3>
+	<p>Or by jquery trigger:</p>
+	<pre>
+selector: the class for the items you want to tab
+tabnav: tab|pill : according to bootstrap spec you can choose tab or pill
+tabfade: true|false : add a fading effect to tabs		
+	</pre>
+	<h3>data-*</h3>
+	<p>You can pass options by <code>data-*</code> attribute.</p> 
+<pre>
+&lt;div id="uniqueId" data-tabnav="pill" data-tabfade="false"&gt;
+	...
+&lt;/div&gt;
+</pre>	
+	<h3>Example</h3>
+	<div id="tabsection" data-tabnav="pill" data-tabfade="true">
+		<p class="tabitem">Lorem</p>
+		<div>
+				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras vestibulum quis nibh vitae viverra. Donec sit amet aliquam ligula, non suscipit erat. Morbi cursus sit amet erat a cursus. Praesent dui nibh, eleifend nec vulputate vel, auctor sed quam. Aenean massa magna, fermentum et sagittis at, fringilla at sapien. Mauris bibendum lectus nibh, at consectetur nulla viverra eu. Quisque aliquet neque vitae convallis placerat. Etiam et commodo sapien, vel consectetur felis. Sed iaculis rutrum pulvinar. Interdum et malesuada fames ac ante ipsum primis in faucibus. In interdum eget tortor sit amet mattis. Curabitur non eros ligula. Duis nibh mauris, tincidunt sed commodo ac, lobortis sit amet orci. Maecenas rhoncus neque nec vestibulum tincidunt. Morbi ex neque, luctus sit amet nibh sed, ornare imperdiet nisl. Praesent venenatis gravida mollis. Duis nec maximus sem, non efficitur velit. Fusce dictum dolor cursus, vehicula neque sed, venenatis augue. Donec non turpis pharetra, aliquam ante et, volutpat sapien. Sed ornare, erat et faucibus dictum, libero urna sagittis ex, eget consequat felis tellus id risus. Aliquam et posuere tortor. Nullam convallis cursus porttitor. Aliquam auctor eget tortor sit amet auctor.
+			</p>
+			</div>
+		<p class="tabitem">Ipsum</p>
+		<div>
+			<p>Sed iaculis rutrum pulvinar. Interdum et malesuada fames ac ante ipsum primis in faucibus. In interdum eget tortor sit amet mattis. Curabitur non eros ligula. Duis nibh mauris, tincidunt sed commodo ac, lobortis sit amet orci. Maecenas rhoncus neque nec vestibulum tincidunt. Morbi ex neque, luctus sit amet nibh sed, ornare imperdiet nisl. Praesent venenatis gravida mollis. Duis nec maximus sem, non efficitur velit. Fusce dictum dolor cursus, vehicula neque sed, venenatis augue. Donec non turpis pharetra, aliquam ante et, volutpat sapien. Sed ornare, erat et faucibus dictum, libero urna sagittis ex, eget consequat felis tellus id risus. Aliquam et posuere tortor. Nullam convallis cursus porttitor. Aliquam auctor eget tortor sit amet auctor.</p>
+		</div>
+		<p class="tabitem">Dolor</p>
+		<div>
+			<p>Interdum et malesuada fames ac ante ipsum primis in faucibus. In interdum eget tortor sit amet mattis. Curabitur non eros ligula. Duis nibh mauris, tincidunt sed commodo ac, lobortis sit amet orci. Maecenas rhoncus neque nec vestibulum tincidunt. Morbi ex neque, luctus sit amet nibh sed, ornare imperdiet nisl. Praesent venenatis gravida mollis. Duis nec maximus sem, non efficitur velit. Fusce dictum dolor cursus, vehicula neque sed, venenatis augue. Donec non turpis pharetra, aliquam ante et, volutpat sapien. Sed ornare, erat et faucibus dictum, libero urna sagittis ex, eget consequat felis tellus id risus. Aliquam et posuere tortor. Nullam convallis cursus porttitor. Aliquam auctor eget tortor sit amet auctor.
+			</p>
+		</div>
+	</div>	
+	
+	<div id="tabsection-new" class="tabfy" data-tabnav="tab" data-tabfade="true">
+		<p class="tabitem">Consectetur</p>
+		<div>
+				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras vestibulum quis nibh vitae viverra. Donec sit amet aliquam ligula, non suscipit erat. Morbi cursus sit amet erat a cursus. Praesent dui nibh, eleifend nec vulputate vel, auctor sed quam. Aenean massa magna, fermentum et sagittis at, fringilla at sapien. Mauris bibendum lectus nibh, at consectetur nulla viverra eu. Quisque aliquet neque vitae convallis placerat. Etiam et commodo sapien, vel consectetur felis. Sed iaculis rutrum pulvinar. Interdum et malesuada fames ac ante ipsum primis in faucibus. In interdum eget tortor sit amet mattis. Curabitur non eros ligula. Duis nibh mauris, tincidunt sed commodo ac, lobortis sit amet orci. Maecenas rhoncus neque nec vestibulum tincidunt. Morbi ex neque, luctus sit amet nibh sed, ornare imperdiet nisl. Praesent venenatis gravida mollis. Duis nec maximus sem, non efficitur velit. Fusce dictum dolor cursus, vehicula neque sed, venenatis augue. Donec non turpis pharetra, aliquam ante et, volutpat sapien. Sed ornare, erat et faucibus dictum, libero urna sagittis ex, eget consequat felis tellus id risus. Aliquam et posuere tortor. Nullam convallis cursus porttitor. Aliquam auctor eget tortor sit amet auctor.
+			</p>
+			</div>
+		<p class="tabitem">Pulvinar</p>
+		<div>
+			<p>Sed iaculis rutrum pulvinar. Interdum et malesuada fames ac ante ipsum primis in faucibus. In interdum eget tortor sit amet mattis. Curabitur non eros ligula. Duis nibh mauris, tincidunt sed commodo ac, lobortis sit amet orci. Maecenas rhoncus neque nec vestibulum tincidunt. Morbi ex neque, luctus sit amet nibh sed, ornare imperdiet nisl. Praesent venenatis gravida mollis. Duis nec maximus sem, non efficitur velit. Fusce dictum dolor cursus, vehicula neque sed, venenatis augue. Donec non turpis pharetra, aliquam ante et, volutpat sapien. Sed ornare, erat et faucibus dictum, libero urna sagittis ex, eget consequat felis tellus id risus. Aliquam et posuere tortor. Nullam convallis cursus porttitor. Aliquam auctor eget tortor sit amet auctor.</p>
+		</div>
+		<p class="tabitem">Interdum</p>
+		<div>
+			<p>Interdum et malesuada fames ac ante ipsum primis in faucibus. In interdum eget tortor sit amet mattis. Curabitur non eros ligula. Duis nibh mauris, tincidunt sed commodo ac, lobortis sit amet orci. Maecenas rhoncus neque nec vestibulum tincidunt. Morbi ex neque, luctus sit amet nibh sed, ornare imperdiet nisl. Praesent venenatis gravida mollis. Duis nec maximus sem, non efficitur velit. Fusce dictum dolor cursus, vehicula neque sed, venenatis augue. Donec non turpis pharetra, aliquam ante et, volutpat sapien. Sed ornare, erat et faucibus dictum, libero urna sagittis ex, eget consequat felis tellus id risus. Aliquam et posuere tortor. Nullam convallis cursus porttitor. Aliquam auctor eget tortor sit amet auctor.
+			</p>
+		</div>
+	</div>	
+	
+	
+	</div>
+	<div class="plugin-footnotes">
+		<h2>$.fn.footnotes - nifty footnotes</h2>
+		<p>With <b>$.fn.footnotes</b> you can manage document footnotes. </p>
+		<p>The plugin:</p> 
+		<ul>
+			<li>creates anchor references fron the text to the notes</li>
+			<li>shows the footnote in a popover tooltip,</li>
+			<li>scrolls the page smoothly to the note when the anchor is clicked,</li>
+			<li>and creates the back link from note to text.</li>
+		</ul>
+
+		<h3>Trigger</h3>
+		<p>Add the empty tag <code>&lt;span class="footnote"&gt;&lt;/span&gt;</code> to the text to build references notes
+		and a div with id <code>#footnotes</code> in the page.</p>
+		<p>Just call the plugin: <code>$.fn.footnotes()</code>, no matter if you hook it to a class or element: <strike><code>$('#id').footnotes()</code></strike></p>
+		<h3>Options</h3>
+		<p><b>footnotes</b> has a several of options:</p>
+		<pre>
+		//Show the notes at the bottom of the page
+		//options: true,false,'collapse'
+		viewNotes: true, 		        
+		//Show the note in a popover
+		popover: true,	
+		//If the notes are collapsed
+		//edit the button label here
+		buttonLabel: "See footnotes",				
+		//These settings affects the popover
+		//as in the bootstrap popover configuration.
+		//The page container to scan 
+		container: 'body',
+		// Allow HTML in the popover
+		html : true,
+		//Trigger: 'click' or 'hover'
+		trigger: "hover",
+		//Popover position
+		placement: "auto bottom"		
+		</pre>
+		<h3>Example</h3>
+		<pre>
+		<p>Maecenas sit amet dolor odio. Quisque aliquet leo arcu, 
+		vel vulputate ipsum fringilla et. Donec ex lacus, feugiat vel 
+		auctor eget, faucibus sit amet elit.<span class="footnote"></span></p>
+		....
+		<div id="footnotes">
+			<div>
+				<p>Lorem Ipsum, Aliquam <b>porttitor lorem</b> ipsum, 
+				ac venenatis tellus maximus nec. Sed aliquet volutpat sollicitudin.</p>
+			</div>
+		....
+		</div>	
+		</pre>
+<div class="row">
+	<div class="col-md-8 col-md-offset-1 text-justify">		
+		<article>
+			<p>Maecenas sit amet dolor odio. Quisque aliquet leo arcu, vel vulputate ipsum fringilla et. Donec ex lacus, feugiat vel auctor eget, faucibus sit amet elit.<span class="footnote"></span> Sed consequat lacus id massa consectetur imperdiet. Proin nec enim dapibus, semper dui et, pharetra urna. Sed finibus purus quam, nec laoreet risus eleifend nec. Sed velit quam, condimentum a tincidunt sed, imperdiet nec nunc. Nullam non euismod ligula. Praesent viverra ante ac magna lobortis, sed molestie nulla ornare.<span class="footnote"></span> Sed commodo ut felis condimentum ornare. Nullam semper purus cursus leo posuere, at bibendum nulla consequat. Sed hendrerit ornare malesuada. Nam porttitor sit amet massa quis volutpat. Pellentesque lobortis laoreet odio sed imperdiet.<span class="footnote"></span> Quisque dictum faucibus lorem sed egestas.</p>
+			
+			<div id="footnotes">
+				<div>
+					<p>
+					Lorem Ipsum, Aliquam <b>porttitor lorem</b> ipsum, ac venenatis tellus maximus nec. Sed aliquet volutpat sollicitudin.</p>
+				</div>
+				<div>
+					<p>
+					Curabitur pellentesque urna vel ipsum auctor elementum.</p>
+				</div>
+				<div>
+					<p>
+					Quisque euismod ullamcorper mi vitae efficitur. In hac habitasse platea dictumst. Vestibulum rutrum suscipit libero, vestibulum aliquet eros varius nec. Maecenas tristique augue ex. Duis blandit ac felis vel posuere.</p>
+				</div>
+				<div class="clearfix"></div>
+		</div>
+		</article>
+	
+</div>		
+</div>
+	</div>
+	<div class="plugin-pretty-pre">
+		<h2>$.fn.prettyPre - pretty code boxes</h2>
+		<p>With <code>$.fn.prtettyPre</code> you can prettify code blocks.</p>
+		<h3>Trigger</h3>
+		<p> Just set <code>prettify:true</code> in docPlugin options to prettify all the <code>#document</code>, or load the plugin alone: <code>$.fn.prettyPre()</code></p>
+		<p>The plugin ha effects only on <code>pre</code> elements.</p>
+		<p>The pretty-pre CSS provides also for a class <code>.expand</code> to extend the pre box with long code strings.</p>
+	</div>
+	<div class="plugin-scroller">
+		 <h2>$.fn.scroller - scroll to anchors</h2>
+		 <p>The <code>$.fn.scroller()</code> plugin add a smooth scroll effect to all link anchors inside an element with <code>.scrollnav</code> class.</p>
+		 <h3>Trigger</h3>
+		 <p>Trig the plugin by setting in docPlugin</p>
+		<pre>
+		scroller:true|false
+		</pre>
+		and 
+		<pre>
+		scrollerdelta:50
+		</pre>
+		<p>So the smooth scroll will be applied to document anchors: buttons, notes anchors and toc links</p>
+		<p>The plugin can also be triggered alone:</p>
+		<pre>
+		$.fn.scroller({
+			delta: 50
+		});		
+		</pre>
+     </div>	
+	<div class="plugin-fullpage">
+		<h2>$.fn.fullpage - stretch a section</h2>
+		<p>This plug-in extends an element to the full size of the page</p>
+		<h3>Trigger</h3>
+		<p>Set in docPlugin options <code>chapterfullpage: true</code> to set full page for all your document main sections (chapters).</p>
+		<p>Or hook the plugin to an element:</p>
+		<pre>
+			$('.jumbotron').fullpage();
+		</pre>
+		<p>Or add the <code>.fullpage</code> class to the element(s) to stretch and load the plugin alone:</p>
+		<pre>$.fn.fullpage()</pre>
+		<h3>Options</h3>
+		<pre>
+//delta is an integer to 
+//subtract from the windows height
+//useful if you have a navbar
+delta: 50
+		</pre>	
+     </div>
+    <div class="plugin-sortlist scrollnav">
+		<h2>$.fn.sortlist - sort lists</h2>
+		<p>This helper sorts each list in a container with class <code>.sorted</code></p>
+		<h3>Trigger</h3>
+		<p>Just set <code>sortlist:true</code> in docPlugin options to sort each list with class <code>.sorted</code> inside the document</p>
+		<p>Or load the plugin alone: <code>$.fn.sortlist()</code> and mark up the list container with <code>class="sorted"</code>.</p>
+		<p>You can manage sorting via <code>data-*</code> attribute, i.e. <code>data-sort="desc"</code> in the list container, or in plugin call.</p>
+		<pre>
+<ul class="sorted">
+<li>Lorem ipsum</li> 
+<li>dolor sit amet, consectetur adipiscing elit.</li>
+<li>Maecenas sed leo consectetur</li> 
+<li>aliquam tellus at, vehicula nunc.</li>
+<li>Praesent sagittis tellus tristique, lobortis ante a, pretium quam.</li>
+</ul>
+		</pre>
+		<h3>Examples</h3>
+<p>Example: <code>ul class="sorted"</code></p>		
+<ul class="sorted">
+<li>Lorem ipsum</li> 
+<li>dolor sit amet, consectetur adipiscing elit.</li>
+<li>Maecenas sed leo consectetur</li> 
+<li>aliquam tellus at, vehicula nunc.</li>
+<li>Praesent sagittis tellus tristique, lobortis ante a, pretium quam.</li>
+</ul>
+
+<p>Example: <code>ol class="sorted" data-sort="desc"</code></p>		
+<ol class="sorted" data-sort="desc">
+<li>Lorem ipsum</li> 
+<li>dolor sit amet, consectetur adipiscing elit.</li>
+<li>Maecenas sed leo consectetur</li> 
+<li>aliquam tellus at, vehicula nunc.</li>
+<li>Praesent sagittis tellus tristique, lobortis ante a, pretium quam.</li>
+</ol>
+		
+	</div>	
+    </div>
+</div> <!-- /container -->
+<div class="container">
+      <footer>
+        <p>&copy;LEFT 2019 <a href="https://github.com/orazionelson">https://github.com/orazionelson</a> alfredo.cosco[AT]gmail.com</p>
+        <p>Cover pic by:<a href="https://www.freepik.com/free-photos-vectors/business">Business vector created by rawpixel.com - www.freepik.com</a></p>
+      </footer>
+</div>
+
+    <!-- JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="js/jquery-2.2.4.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.document.plugin.js"></script>
+	<script>
+		//template for documentPlugin
+		$(document).ready(function(){
+			
+			/*docPluginOptions:
+				//activate fullpage on every .chapter
+				chapterfullpage: true, //true|false
+				//show chapre buttons
+				chapterbuttons: "top,prev,next", //false|"top,prev,next"
+				//prettify <pre> elements in document
+				prettify:true, //true|false
+				//activare scroller i document
+				scroller:true,
+				//set globally the scroller delta
+				scrollerdelta:50
+				//sort each list with class .sorted
+				sortlist:true,
+			*/
+			
+			$("#document").docPlugin();
+			
+			//Call the helper indipendently if you need
+			//Prettify your code
+			//$.fn.prettyPre();
+			
+			//Show fullpage section(s)
+			$('.jumbotron').fullpage();
+			//$.fn.fullpage();
+			
+			//$.fn.docPlugin.docSettings.tocfy.options.tocbehavior='fixed';
+			//console.log($.fn.docPlugin.docSettings);
+			/*Generates toc
+			 * Set options also by data-(option) in the
+			 * documentSelector, default: #document
+			 * 
+			 * options:
+			 *  deepness:'123456', //a string of numbers from 1 to 6 defines how deep is your menu
+			 *	tocside: right, //choose :right|left|top
+			 *	tocbehavior: scroll //choose:scroll|scrollFixed|fixed|offcanvas
+			 *  offcanvasBtn: '#main' //if set offcanvas toc prepend here the butto for the sliding
+			 */
+			/*$('#document').tocfy({
+				tocbehavior:"scrollFixed"
+				});*/
+			$.fn.tocfy(
+			{
+				tocbehavior:"scrollFixed"
+				}
+			);
+			
+			//Show a page or a section tabbed	
+			$("#tabsection").tabfy();
+			
+			//Render footnotes
+			$.fn.footnotes({
+				viewNotes: true,
+				popover:true,
+				});
+			
+			//Apply scroll to links in 
+			//section with attribute .scrollnav
+			/*var delta=$('.navbar:first').height();
+			$.fn.scroller({
+				delta: delta
+			});*/
+			
+			
+			
+			//Sort a list 
+			//$.fn.sortlist();
+			
+		//
+		});
+	</script>
+  </body>
+</html>
